@@ -230,6 +230,10 @@ class DeformConvPack_d(DeformConv_d):
         dimension_H = 'H' in self.dimension
         dimension_W = 'W' in self.dimension
         b, c, t, h, w = temp.shape
+
+        if self.length == 3:
+            offset = temp
+
         if self.length == 2:
             offset = temp.new_zeros(b, 3 * self.deformable_groups * self.kernel_size[0] * self.kernel_size[1] * self.kernel_size[2], t, h, w)
             if dimension_T == False:
